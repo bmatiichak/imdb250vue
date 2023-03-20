@@ -9,7 +9,7 @@ function serializeResponse(movies) {
   }, {});
 }
 
-const { MOVIES } = mutations;
+const { MOVIES, CURRENT_PAGE } = mutations;
 
 const moviesStore = {
   namespaced: true,
@@ -27,19 +27,17 @@ const moviesStore = {
         top250IDs.slice(from, to),
     currentPage: ({ currentPage }) => currentPage,
     moviesPerPage: ({ moviesPerPage }) => moviesPerPage,
+    moviesLength: ({ top250IDs }) => Object.keys(top250IDs).length,
   },
   mutations: {
     [MOVIES](state, value) {
       state.movies = value;
     },
+    [CURRENT_PAGE](state, value) {
+      state.currentPage = value;
+    },
   },
   actions: {
-    initMoviesStore: {
-      handler({ dispatch }) {
-        dispatch("fetchMovies");
-      },
-      root: true,
-    },
     async fetchMovies({ getters, commit }) {
       try {
         const { currentPage, moviesPerPage, slicedIDs } = getters;
@@ -49,11 +47,14 @@ const moviesStore = {
         const requests = moviesToFetch.map((id) => axios.get(`/?i=${id}`));
         const response = await Promise.all(requests);
         const movies = serializeResponse(response);
-        console.log(movies);
         commit(MOVIES, movies);
       } catch (err) {
         console.log(err);
       }
+    },
+    changeCurrentPage({ commit, dispatch }, page) {
+      commit(CURRENT_PAGE, page);
+      dispatch("fetchMovies");
     },
   },
 };
