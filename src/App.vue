@@ -1,29 +1,40 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link>
-  </nav>
-  <router-view />
+  <PosterBg :poster="posterBg" />
+  <MoviesList :list="moviesList" @changePoster="onChangePoster" />
 </template>
+
+<script>
+import { mapActions, mapGetters } from "vuex";
+import MoviesList from "@/components/MoviesList";
+import PosterBg from "@/components/PosterBg";
+
+export default {
+  name: "HomeView",
+  components: {
+    MoviesList,
+    PosterBg,
+  },
+  data: () => ({
+    posterBg: "",
+  }),
+  computed: {
+    ...mapGetters("moviesStore", ["moviesList"]),
+  },
+  methods: {
+    ...mapActions("moviesStore", ["fetchMovies"]),
+    onChangePoster(poster) {
+      this.posterBg = poster;
+    },
+  },
+};
+</script>
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Arial, Helvetica, Avenir, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+  position: relative;
 }
 </style>
