@@ -1,4 +1,5 @@
 <template>
+  <PagePreloader />
   <PosterBg :poster="posterBg" />
   <MoviesList :list="moviesList" @changePoster="onChangePoster" />
   <MoviesPagination
@@ -14,6 +15,7 @@ import { mapActions, mapGetters } from "vuex";
 import MoviesList from "@/components/MoviesList";
 import PosterBg from "@/components/PosterBg";
 import MoviesPagination from "@/components/MoviesPagination";
+import PagePreloader from "@/components/PagePreloader";
 
 export default {
   name: "HomeView",
@@ -21,6 +23,7 @@ export default {
     MoviesList,
     PosterBg,
     MoviesPagination,
+    PagePreloader,
   },
   data: () => ({
     posterBg: "",

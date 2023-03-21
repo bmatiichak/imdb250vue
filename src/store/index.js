@@ -1,16 +1,15 @@
 import { createStore } from "vuex";
 import moviesStore from "./modules/movies";
+import loader from "./modules/loader";
 
 const store = createStore({
-  state: {},
   getters: {},
   mutations: {},
   actions: {},
   modules: {
     moviesStore,
+    loader,
   },
 });
-
-store.dispatch("initMoviesStore");
 
 export default store;
