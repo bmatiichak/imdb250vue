@@ -1,5 +1,6 @@
 <template>
   <PagePreloader />
+  <Notification />
   <PosterBg :poster="posterBg" />
   <Header />
   <MoviesList :list="moviesList" @changePoster="onChangePoster" />
@@ -17,7 +18,8 @@ import MoviesList from "@/components/MoviesList";
 import PosterBg from "@/components/PosterBg";
 import MoviesPagination from "@/components/MoviesPagination";
 import PagePreloader from "@/components/PagePreloader";
-import Header from "./components/Header";
+import Header from "@/components/Header";
+import Notification from "@/components/Notification";
 
 export default {
   name: "HomeView",
@@ -27,6 +29,7 @@ export default {
     MoviesPagination,
     PagePreloader,
     Header,
+    Notification,
   },
   data: () => ({
     posterBg: "",

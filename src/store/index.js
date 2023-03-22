@@ -1,6 +1,7 @@
 import { createStore } from "vuex";
 import moviesStore from "./modules/movies";
-import loader from "./modules/loader";
+import loaderStore from "./modules/loader";
+import notificationStore from "./modules/notification";
 
 const store = createStore({
   getters: {},
@@ -8,7 +9,8 @@ const store = createStore({
   actions: {},
   modules: {
     moviesStore,
-    loader,
+    loaderStore,
+    notificationStore,
   },
 });
 

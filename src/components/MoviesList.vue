@@ -45,6 +45,7 @@ export default {
   },
   methods: {
     ...mapActions("moviesStore", ["removeMovie"]),
+    ...mapActions(["showNotify"]),
     onMouseOver(poster) {
       this.$emit("changePoster", poster);
     },
@@ -55,6 +56,11 @@ export default {
       if (isConfirmed) {
         console.log(id);
         this.removeMovie(id);
+        this.showNotify({
+          msg: "Movie has been deleted from your list",
+          variant: "success",
+          title: "Success!",
+        });
       }
     },
   },
