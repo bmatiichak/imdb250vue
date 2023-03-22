@@ -13,7 +13,11 @@
           >
         </div>
         <div class="col">
-          <BButton class="w-100" size="md" variant="outline-light"
+          <BButton
+            class="w-100"
+            size="md"
+            variant="outline-light"
+            @click="emitRemoveEvent"
             >Remove</BButton
           >
         </div>
@@ -37,6 +41,15 @@ export default {
       };
     },
   },
+  methods: {
+    emitRemoveEvent() {
+      this.$emit("removeItem", {
+        id: this.movie.imdbID,
+        title: this.movie.Title,
+      });
+    },
+  },
+  emits: ["remove-item"],
 };
 </script>
 
