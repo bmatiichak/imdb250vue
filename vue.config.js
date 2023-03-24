@@ -1,4 +1,5 @@
 module.exports = {
+  publicPath: '/moviesapp',
   chainWebpack: (config) => {
     config.resolve.alias.set("vue", "@vue/compat");
 
