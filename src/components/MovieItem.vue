@@ -8,8 +8,12 @@
       </div>
       <div class="movie-item-controls row no-gutters">
         <div class="col">
-          <BButton class="w-100" size="md" variant="outline-light"
-            >Edit</BButton
+          <BButton
+            class="w-100"
+            size="md"
+            variant="outline-light"
+            @click="showInfoModalEvent"
+            >Info</BButton
           >
         </div>
         <div class="col">
@@ -47,6 +51,9 @@ export default {
         id: this.movie.imdbID,
         title: this.movie.Title,
       });
+    },
+    showInfoModalEvent() {
+      this.$emit("showModal", this.movie.imdbID);
     },
   },
   emits: ["remove-item"],

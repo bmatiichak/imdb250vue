@@ -9,6 +9,7 @@
             :movie="movie"
             @mouseover.native="onMouseOver(movie.Poster)"
             @removeItem="onRemoveItem"
+            @showModal="onShowMovieInfo"
           />
         </BCol>
       </template>
@@ -16,12 +17,25 @@
         <h2>Oooops. There are no movies...</h2>
       </template>
     </BRow>
+    <BModal
+      modal-class="movie-modal"
+      :id="movieInfoModalID"
+      size="xl"
+      hide-footer
+      hide-header
+    >
+      <MovieInfoModalContent
+        :movie="selectedMovie"
+        @closeModal="onCloseModal"
+      />
+    </BModal>
   </BContainer>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
 import MovieItem from "./MovieItem";
+import MovieInfoModalContent from "./MovieInfoModalContent";
 
 export default {
   name: "MoviesList",
@@ -31,8 +45,13 @@ export default {
       default: () => ({}),
     },
   },
+  data: () => ({
+    movieInfoModalID: "movie-info",
+    selectedMovieId: "",
+  }),
   components: {
     MovieItem,
+    MovieInfoModalContent,
   },
   computed: {
     ...mapGetters("moviesStore", ["isSearchActive"]),
@@ -41,6 +60,9 @@ export default {
     },
     listTitle() {
       return this.isSearchActive ? "Your search result:" : "IMDB Top 250";
+    },
+    selectedMovie() {
+      return this.selectedMovieId ? this.list[this.selectedMovieId] : null;
     },
   },
   methods: {
@@ -63,15 +85,31 @@ export default {
         });
       }
     },
+    onShowMovieInfo(id) {
+      this.selectedMovieId = id;
+      this.$bvModal.show(this.movieInfoModalID);
+    },
+    onCloseModal() {
+      this.selectedMovieId = null;
+      this.$bvModal.hide(this.movieInfoModalID);
+    },
   },
   emits: ["changePoster"],
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .list-title {
   font-size: 50px;
   margin-bottom: 30px;
   color: #fff;
+}
+</style>
+
+<style lang="scss">
+.movie-modal {
+  .modal-body {
+    padding: 0;
+  }
 }
 </style>

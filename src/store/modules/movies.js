@@ -87,7 +87,6 @@ const moviesStore = {
         const movies = serializeResponse(response.Search);
         commit(MOVIES, movies);
       } catch (err) {
-        console.log(err.message);
         dispatch(
           "showNotify",
           {
