@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/no-deprecated-v-on-native-modifier -->
 <template>
-  <BContainer>
+  <BContainer class="movie-container">
     <h3 class="list-title">{{ listTitle }}</h3>
     <BRow>
       <template v-if="ifExists">
@@ -103,6 +103,10 @@ export default {
   font-size: 50px;
   margin-bottom: 30px;
   color: #fff;
+}
+
+.movie-container {
+  margin-bottom: 30px;
 }
 </style>
 

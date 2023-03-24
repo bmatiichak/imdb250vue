@@ -42,7 +42,7 @@ export default {
 
 <style lang="scss" scoped>
 .movies-pagination {
-  margin-top: 30px;
+  margin-top: auto;
   &:deep(.pagination .page-item .page-link) {
     background-color: transparent;
     font-size: 12px;
