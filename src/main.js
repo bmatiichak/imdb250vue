@@ -6,7 +6,7 @@ import "./plugins/bootstrap";
 
 const routes = [
   {
-    path: "/",
+    path: "/imdb250vue",
     component: App,
   },
 ];
