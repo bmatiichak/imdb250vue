@@ -6,31 +6,35 @@
         <h3 class="movie-title">{{ movie.Title }}</h3>
         <span class="movie-year">{{ movie.Year }}</span>
       </div>
-      <div class="movie-item-controls row no-gutters">
-        <div class="col">
-          <BButton
-            class="w-100"
-            size="md"
-            variant="outline-light"
-            @click="showInfoModalEvent"
-            >Info</BButton
-          >
+      <template v-if="!isSearchActive">
+        <div class="movie-item-controls row no-gutters">
+          <div class="col">
+            <BButton
+              class="w-100"
+              size="md"
+              variant="outline-light"
+              @click="showInfoModalEvent"
+              >Info</BButton
+            >
+          </div>
+          <div class="col">
+            <BButton
+              class="w-100"
+              size="md"
+              variant="outline-light"
+              @click="emitRemoveEvent"
+              >Remove</BButton
+            >
+          </div>
         </div>
-        <div class="col">
-          <BButton
-            class="w-100"
-            size="md"
-            variant="outline-light"
-            @click="emitRemoveEvent"
-            >Remove</BButton
-          >
-        </div>
-      </div>
+      </template>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "MovieItem",
   props: {
@@ -39,6 +43,7 @@ export default {
     },
   },
   computed: {
+    ...mapGetters("moviesStore", ["isSearchActive"]),
     posterBg() {
       return {
         "background-image": `url(${this.movie.Poster})`,

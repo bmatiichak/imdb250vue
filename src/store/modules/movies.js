@@ -28,7 +28,10 @@ const moviesStore = {
         top250IDs.slice(from, to),
     currentPage: ({ currentPage }) => currentPage,
     moviesPerPage: ({ moviesPerPage }) => moviesPerPage,
-    moviesLength: ({ top250IDs }) => Object.keys(top250IDs).length,
+    moviesLength: ({ top250IDs, movies, isSearchActive }) =>
+      Object.keys(movies) && isSearchActive
+        ? Object.keys(movies).length
+        : Object.keys(top250IDs).length,
     isSearchActive: ({ isSearchActive }) => isSearchActive,
   },
   mutations: {
