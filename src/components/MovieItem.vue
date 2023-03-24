@@ -79,6 +79,12 @@ export default {
   }
 }
 
+@media (max-width: 539.9px) {
+  .movie-item {
+    height: 300px;
+  }
+}
+
 .movie-item-poster {
   position: absolute;
   top: 0;
